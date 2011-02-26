@@ -56,7 +56,6 @@ function get_twFeed($twFeed_usr,$twFeed_show){
 function twFeed_widget($args) {
 	extract($args);
 	$options = get_option('widget_twFeed');
-	$twFeed_title = "@paul_cormack";
 	echo '<h2 class="widgettitle">'.$options['title'].'</h2>';
 	get_twFeed($options['user'],$options['posts']);
 }
