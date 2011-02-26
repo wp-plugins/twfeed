@@ -23,7 +23,6 @@ function get_twFeed($twFeed_usr,$twFeed_show){
 	
 	if (!function_exists('MagpieRSS')){
 		include_once (ABSPATH . WPINC . '/rss.php');
-		error_reporting(E_ERROR);
 	}
 
 	# get all contents from rss feed$twFeed_tweet
