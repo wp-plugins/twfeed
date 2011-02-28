@@ -10,8 +10,6 @@ Integrates a Twitter RSS feed into your blog. Comes widget ready or by creating 
 
 == Description ==
 
-Integrates a Twitter RSS feed into your blog. Comes widget ready or by adding get_twFeed("username",num_posts); directly in a template file.
-
 * Basic plugin, early development stage.
 * Displays tweets in a unordered list so output can be styled with CSS.
 * Tweet links are opened in a new window or tab.
@@ -51,6 +49,9 @@ An example using the sidebar:
 2. twFeed @wordpress Sidebar Demo
 
 == Changelog ==
+
+= 0.4.1 =
+* Fixed a regular expression bug pointed out by @compywiz on Twitter. (String contents like 1.5GHz turns into a clickable link).
 
 = 0.4 =
 * Complete code restructure using a class layout with object calls.

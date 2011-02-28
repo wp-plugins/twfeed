@@ -3,7 +3,7 @@
 Plugin Name: twFeed
 Plugin URI: http://www.paulcormack.net/projects#twFeed
 Description: Integrates a Twitter RSS feed into your blog. Comes widget ready or by creating a new object and calling the function directly in php template files.
-Version: 0.4
+Version: 0.4.1
 License: GPLV2
 Author: Paul Cormack
 Author URI: http://www.paulcormack.net
@@ -38,9 +38,8 @@ class twFeed {
 				#$twFeed_time = $tweet['pubDate'];
 				$twFeed_tweet = str_replace($twFeed_usr.":",'', $twFeed_desc);
 				$twFeed_tweet = htmlspecialchars(stripslashes($twFeed_tweet));
-				$twFeed_tweet = preg_replace(
-					'@((https?://)?([-\w]+\.[-\w\.]+)+\w(:\d+)?(/([-\w/_\.]*(\?\S+)?)?)*)@',
-					'<a href="$1" title="$1" alt="$1" target="_blank">$1</a>', $twFeed_tweet);
+				$url_regex = '`\b(https?|ftp)://[-A-Za-z0-9+@#/%?=~_|!:,.;]*[-A-Za-z0-9+@#/%=~_|]\b`';
+				$twFeed_tweet = preg_replace($url_regex, '<a href="\0" title="\0" alt="\0" target="_blank">\0</a>', $twFeed_tweet);
 				echo "<li>".$twFeed_tweet."</li>";
 			}
 			echo $twFeed_after;
