@@ -10,10 +10,10 @@ Integrates a Twitter RSS feed into your blog. Comes widget ready or by creating 
 
 == Description ==
 
-* Basic plugin, early development stage.
 * Displays tweets in a unordered list so output can be styled with CSS.
 * Tweet links are opened in a new window or tab.
 * Defaults to 5 posts from my twitter account.
+* Links @mentions.
 
 == Installation ==
 
@@ -23,32 +23,44 @@ Integrates a Twitter RSS feed into your blog. Comes widget ready or by creating 
 1. Navigate to 'Appearance' > 'Widgets' in the WP admin dashboard. Expand widget to enter the title, Twitter username and number of tweets to display. 
 1. Optional: Add to php template files:
 
-* $new_feed = new twFeed();
-* $new_feed->get_twFeed("paul_cormack",10);
+`$new_feed = new twFeed();`
+`$new_feed->get_twFeed(array(
+	'user'=>"paul_cormack", 
+	'post_count'=>15, 
+	'show_date'=>true));`
 
 == Frequently Asked Questions ==
 
-= Why a limit of 20 tweets? =
+= What are the limitations? =
 
-The RSS feed is limited to 20 results.
+The twitter RSS feed is limited to 20 results and has certain a reload time.
 
 = Can the plugin be used multiple times? =
 
-Plugin yes, widget only once.
+Yes, with different users etc.
 
 = How can CSS be used to style a feed? =
 
-An example using the sidebar:
-
-* div#sidebar ul.twFeed{  }
-* div#sidebar ul.twFeed li{  }
+An example:
+`ul.twFeed{  }`
+`ul.twFeed li{  }`
+`a.twFeed_mention{ color:red; }`
+`a.twFeed_date{ color:green; }`
 
 == Screenshots ==
 
-1. Widget Screen
-2. twFeed @wordpress Sidebar Demo
+1. Admin widget screenshot
+2. twFeed @wordpress Sidebar
 
 == Changelog ==
+
+= 1.0 =
+* Rewrote class to extend `WP_Widget`.
+* Updated regular expressions.
+* Calls within PHP template pages have changed. (See installation).
+* Added linking @mentions as default.
+* Added option to display tweet time.
+* Updated screenshots.
 
 = 0.4.1 =
 * Fixed a regular expression bug pointed out by @compywiz on Twitter. (String contents like 1.5GHz turns into a clickable link).
@@ -61,6 +73,10 @@ An example using the sidebar:
 * Initial release
 
 == Upgrade Notice ==
+
+= 0.5 =
+* Changed argument structure for object calls within PHP template files.
+* See installation if you use twFeed within PHP template files.
 
 = 0.4 =
 * Due to the code restructuring, usage outside of widget area has changed. See installation section for more information.
