@@ -3,10 +3,10 @@ Contributors: pcormack
 Donate link: none
 Tags: twitter, rss, widget, feed
 Requires at least: 2.1
-Tested up to: 3.1
+Tested up to: 3.2.1
 Stable tag: 0.3
 
-Integrates a Twitter RSS feed into your blog. Comes widget ready or by creating a new object directly in a php template file.
+Integrates a Twitter RSS feed into your blog. Comes widget ready.
 
 == Description ==
 
@@ -21,13 +21,6 @@ Integrates a Twitter RSS feed into your blog. Comes widget ready or by creating 
 1. Activate the plugin through the 'Plugins' menu in WordPress.
 1. Navigate to 'Plugins' > 'Installed' in the WP admin dashboard. Locate twFeed and click activate.
 1. Navigate to 'Appearance' > 'Widgets' in the WP admin dashboard. Expand widget to enter the title, Twitter username and number of tweets to display. 
-1. Optional: Add to php template files:
-
-`$new_feed = new twFeed();`
-`$new_feed->get_twFeed(array(
-	'user'=>"paul_cormack", 
-	'post_count'=>15, 
-	'show_date'=>true));`
 
 == Frequently Asked Questions ==
 
@@ -37,11 +30,10 @@ The twitter RSS feed is limited to 20 results and has certain a reload time.
 
 = Can the plugin be used multiple times? =
 
-Yes, with different users etc.
+Yes, with different users in the same or different widget areas.
 
-= How can CSS be used to style a feed? =
+= Styling With CSS =
 
-An example:
 `ul.twFeed{  }`
 `ul.twFeed li{  }`
 `a.twFeed_mention{ color:red; }`
@@ -53,6 +45,9 @@ An example:
 2. twFeed @wordpress Sidebar
 
 == Changelog ==
+
+= 1.1  =
+* Fixed @mention bug which removed the preceding space from links.
 
 = 1.0 =
 * Rewrote class to extend `WP_Widget`.

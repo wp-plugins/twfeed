@@ -2,18 +2,20 @@
 /*
 Plugin Name: twFeed
 Plugin URI: http://www.paulcormack.net/projects#twFeed
-Description: Integrates a Twitter RSS feed into your blog. Comes widget ready or by creating a new object and calling the function directly in php template files.
-Version: 1.0
+Description: Integrates a Twitter RSS feed into your blog. Comes widget ready.
+Version: 1.1
 License: GPLV2
 Author: Paul Cormack
-Author URI: http://www.paulcormack.net
+Author URI: http://www.paulcormack.net/
 */
 
 class twFeed extends WP_Widget {
 
 	function twFeed() {
+
 		$widget_ops = array( 'classname' => 'widget_twFeed', 'description' => __( "A twitter RSS parser." ) );
 		$this->WP_Widget('twFeed', __('twFeed'), $widget_ops);
+	
 	}
 		
 	function get_twFeed($u_opts){
@@ -55,8 +57,8 @@ class twFeed extends WP_Widget {
 					'<a href="\0" title="\0" alt="\0" target="_blank">\0</a>', 
 					$twFeed_tweet );
 				$twFeed_tweet = preg_replace($mention_regex, 
-					'<a class="twFeed_mention" href="http://www.twitter.com/\\2" title="\\2" ' . 
-					'alt="\\2" target="_blank">@\\2</a>', $twFeed_tweet);
+					' @<a class="twFeed_mention" href="http://www.twitter.com/\\2" title="\\2" ' . 
+					'alt="\\2" target="_blank">\\2</a>', $twFeed_tweet);
 
 				if ($u_opts['show_date']) {
 					$twFeed_tweet = $twFeed_tweet . ' <a class="twFeed_date" href="' . 
@@ -77,6 +79,7 @@ class twFeed extends WP_Widget {
 	}
 
 	function widget($args, $instance) {
+		
 		extract($args);
 		echo $before_widget;
 		if(!empty($instance['title'])) echo $before_title . $instance['title'] . $after_title; 
@@ -87,24 +90,27 @@ class twFeed extends WP_Widget {
 			'post_count'=>$instance['post_count'],
 			'show_date'=>$instance['show_date'] ));
 		echo $after_widget;
-	}
 	
+	}
+
 	function update($new_instance, $old_instance) {
+
 		$instance = $old_instance;
 		$instance['title'] = strip_tags( $new_instance['title'] );
 		$instance['user'] = strip_tags( $new_instance['user'] );
 		$instance['post_count'] = strip_tags( $new_instance['post_count'] );
 		$instance['show_date'] = strip_tags( $new_instance['show_date'] );
 		return $new_instance;
+	
 	}
 
-	function form($instance) {		
+	function form($instance) {
 		echo '<div id="twFeed-admin-panel">';
 		echo '<p><label for="' . $this->get_field_id("title") .'">Widget Title:</label>';
-		echo '<input type="text" class="widefat" name="' . $this->get_field_name("title") . '" '; 
+		echo '<input type="text" class="widefat" name="' . $this->get_field_name("title") . '" ';
 		echo 'id="' . $this->get_field_id("title") . '" value="' . $instance["title"] . '" /></p>';
 		echo '<p><label for="' . $this->get_field_id("user") .'">Twitter User:</label>';
-		echo '<input type="text" class="widefat" name="' . $this->get_field_name("user") . '" '; 
+		echo '<input type="text" class="widefat" name="' . $this->get_field_name("user") . '" ';
 		echo 'id="' . $this->get_field_id("user") . '" value="' . $instance["user"] . '" /></p>';
 		echo '<p><label for="' . $this->get_field_id("post_count") . '">How many tweets?</label><br />';
 		echo '<select id="' . $this->get_field_id('post_count') . '" name="' . 
